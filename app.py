@@ -41,7 +41,7 @@ def convert_image():
     new_image_path = os.path.join(new_image_folder_path, new_filename)
 
     image = Image.open(image_path)
-    converted_image, stats = compress_image(image, max_size_kb=100, return_report=True)
+    converted_image, stats = compress_image(image, max_size_kb=200, return_report=True)
     converted_image.save(new_image_path, format='WebP', quality=100)
     for msg in stats['log']:
         print(msg)
