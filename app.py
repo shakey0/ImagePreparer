@@ -2,13 +2,16 @@ from flask import Flask, render_template, send_from_directory, request, redirect
 from PIL import Image
 from image_converter import compress_image
 from sanitize_filename import sanitize_filename
-import os
+import os, json
 
 app = Flask(__name__)
 
-image_folder_path = "../cat_images"
 image_extensions = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp")
-new_image_folder_path = "../converted_cat_images"
+
+cat = "sophie"
+image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/raw_photos")
+new_image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/ready_photos")
+json_path = os.path.expanduser(f"~/Pictures/cats/{cat}/{cat}.json")
 
 def get_first_image():
     files = os.listdir(image_folder_path)
@@ -17,11 +20,18 @@ def get_first_image():
         return image_files[0]
     return None
 
+def get_all_album_names():
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+        albums = data['albums']
+        return [album['name'] for album in albums]
+
 @app.route('/')
 def hello_world():
     first_image = get_first_image()
+    album_names = get_all_album_names()
     if first_image:
-        return render_template('index.html', image_name=first_image)
+        return render_template('index.html', image_name=first_image, album_names=album_names)
     else:
         return "No images found in the folder."
     
@@ -47,6 +57,21 @@ def convert_image():
         print(msg)
     
     os.remove(image_path)
+
+    album = request.form.get('album')
+
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+        albums = data['albums']
+        
+        for album_data in albums:
+            if album_data['name'] == album:
+                order_num = len(album_data['photos']) + 1
+                album_data['photos'].append({'name': new_filename, 'order': order_num})
+                break
+
+    with open(json_path, 'w') as f:
+        json.dump(data, f, indent=4)
 
     return redirect('/')
 

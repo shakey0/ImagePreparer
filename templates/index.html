@@ -2,6 +2,11 @@
 
 <form action="/convert" method="post">
     <input type="text" name="name" placeholder="Enter image name">
+    <select name="album">
+        {% for album in album_names %}
+            <option value="{{ album }}">{{ album }}</option>
+        {% endfor %}
+    </select>
     <input type="submit" value="Convert">
 </form>
 
