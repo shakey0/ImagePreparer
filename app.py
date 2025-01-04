@@ -6,7 +6,7 @@ import os, json
 
 app = Flask(__name__)
 
-image_extensions = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp")
+image_extensions = (".jpg", ".JPG", ".jpeg", ".png", ".PNG", ".webp", ".WEBP", ".bmp", ".BMP")
 
 cat = "sophie"
 image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/raw_photos")
@@ -73,6 +73,16 @@ def convert_image():
     with open(json_path, 'w') as f:
         json.dump(data, f, indent=4)
 
+    return redirect('/')
+
+@app.route('/remove', methods=['POST'])
+def remove_image():
+    first_image = get_first_image()
+    if not first_image:
+        return "No images found in the folder."
+    
+    image_path = os.path.join(image_folder_path, first_image)
+    os.remove(image_path)
     return redirect('/')
 
 if __name__ == '__main__':
