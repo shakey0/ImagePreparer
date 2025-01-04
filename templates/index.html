@@ -1,0 +1,12 @@
+<h1>Hello images!</h1>
+
+<form action="/convert" method="post">
+    <input type="text" name="name" placeholder="Enter image name">
+    <input type="submit" value="Convert">
+</form>
+
+{% if image_name %}
+    <img src="/images/{{ image_name }}" alt="Image" style="max-width: 100%">
+{% else %}
+    <p>No image found</p>
+{% endif %}
