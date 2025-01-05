@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 image_extensions = (".jpg", ".JPG", ".jpeg", ".png", ".PNG", ".webp", ".WEBP", ".bmp", ".BMP")
 
-cat = "sophie"
+cat = "amber"
 image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/raw_photos")
 new_image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/ready_photos")
 json_path = os.path.expanduser(f"~/Pictures/cats/{cat}/{cat}.json")
