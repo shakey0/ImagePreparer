@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 image_extensions = (".jpg", ".JPG", ".jpeg", ".png", ".PNG", ".webp", ".WEBP", ".bmp", ".BMP")
 
-cat = "amber"
+cat = "sophie"
 image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/raw_photos")
 new_image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/ready_photos")
 json_path = os.path.expanduser(f"~/Pictures/cats/{cat}/{cat}.json")
@@ -27,7 +27,7 @@ def get_all_album_names():
         return [album['name'] for album in albums]
 
 @app.route('/')
-def hello_world():
+def hello_images():
     first_image = get_first_image()
     album_names = get_all_album_names()
     if first_image:

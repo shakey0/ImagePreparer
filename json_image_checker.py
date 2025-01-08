@@ -1,6 +1,6 @@
 import os, json
 
-cat = "amber"
+cat = "sophie"
 new_image_folder_path = os.path.expanduser(f"~/Pictures/cats/{cat}/ready_photos")
 json_path = os.path.expanduser(f"~/Pictures/cats/{cat}/{cat}.json")
 
