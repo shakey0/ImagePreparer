@@ -13,4 +13,4 @@ def sanitize_filename(filename):
     
     random_chars = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
     
-    return f"{sanitized}_{random_chars}.webp"
+    return f"{sanitized}__{random_chars}.webp"

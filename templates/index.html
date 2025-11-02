@@ -1,14 +1,9 @@
 <h1>Hello images!</h1>
 
 <div style="display: flex; justify-content: space-between;">
-    <form action="/convert" method="post">
+    <form action="/process" method="post">
         <input type="text" name="name" placeholder="Enter image name">
-        <select name="album">
-            {% for album in album_names %}
-                <option value="{{ album }}">{{ album }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Convert">
+        <input type="submit" value="Process">
     </form>
 
     <form action="/remove" method="post">
